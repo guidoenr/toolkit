@@ -1,0 +1,22 @@
+@author: guidoenr
+
+
+#~ make a unexpected system shutdown, when you are turning on the windows, press the shutdown botton
+#~ repeat if doesnt apear the preparing repare screen
+#~ repare screen >> advanced options >> troubleshoot >> advance options >> system image recovery
+#~ cancel >> next >> advanced >> next >> advanced >> install a driver >> ok 
+#~ search for the C:/Windows/System32/
+#~ rename Utilman to Utilman1
+#~ rename cmd to Utilman
+#~ close all and click continue
+#~ click te UtilmanBoton (between the network and shutdown botton)
+#~ type the following commands
+
+net user
+net user {accountName} * 
+> type new password
+exit
+
+#set the new password
+
+done
