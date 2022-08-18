@@ -1,5 +1,4 @@
-slmgr /ipk XXXX-XXXX-XXXX-XXXX-XXXX-XXXXX
-
+# Windows 10 KEYS
 Win 10 Home: TX9XD-98N7V-6WMQ6-BX7FG-H8Q99
 Win 10 Home N: 3KHY7-WNT83-DGQKR-F7HPR-844BM
 Win 10 Home Single Language: 7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH
@@ -11,9 +10,16 @@ Win 10 Education N: 2WH4N-8QGBV-H22JP-CT43Q-MDWWJ
 Win 10 Enterprise: NPPR9-FWDCX-D2C8J-H872K-2YT43
 Win 10 Enterprise N: DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4
 
+slmgr /ipk XXXX-XXXX-XXXX-XXXX-XXXX-XXXXX
+
 slmgr /skms kms8.msguides.com
 
 slmgr /ato
-# wait for a few seconds
 
-done.
+# Windows 10 pro
+
+slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
+
+slmgr /skms kms8.msguides.com
+
+slmgr /ato
