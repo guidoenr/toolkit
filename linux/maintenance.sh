@@ -44,7 +44,7 @@ printStarting "removing screenshots in ~/Pictures/Screenshots"
 rm -rf ~/Pictures/Screenshots/*
 printFinished 
 
-printf "All tasks finished"
+printf "All tasks finished \n"
 
 exit
 
