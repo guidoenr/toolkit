@@ -6,12 +6,13 @@ func main() {
 	var tooth Autooth
 	err := tooth.initialize()
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
-	err = tooth.ConnectToDevice("a")
+	err = tooth.ConnectToDevice("T2")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println()
 	}
 
+	/*err = tooth.Disconnect()*/
 }

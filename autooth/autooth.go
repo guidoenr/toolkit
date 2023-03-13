@@ -10,8 +10,9 @@ import (
 
 // Autooth (stands for auto-bluetooth) has the entire logic to connect to your desired bluetooth devices
 type Autooth struct {
-	Adapter *adapter.Adapter1
-	Devices []*device.Device1
+	Adapter         *adapter.Adapter1
+	Devices         []*device.Device1
+	ConnectedDevice *device.Device1
 }
 
 func (a *Autooth) initialize() error {
@@ -97,6 +98,11 @@ func (a *Autooth) ConnectToDevice(deviceName string) error {
 		return errors.New(msg)
 	}
 
+	// set the connected device
+	a.ConnectedDevice = speaker
+	fmt.Printf("info: %v", speaker.Properties)
+
+	// get the connected status
 	connected, err := speaker.GetConnected()
 	if err != nil {
 		msg := fmt.Sprintf("getConnected: %v", err)
@@ -116,7 +122,17 @@ func (a *Autooth) ConnectToDevice(deviceName string) error {
 		return errors.New(msg)
 	}
 
-	fmt.Printf("info: %v", speaker.Properties)
+	return nil
+}
 
+// Disconnect disconnects the device
+func (a *Autooth) Disconnect() error {
+	// disconnect from the device
+	err := a.ConnectedDevice.Disconnect()
+	if err != nil {
+		msg := fmt.Sprintf("disconnecting from '%v': %v", a.ConnectedDevice, err)
+		return errors.New(msg)
+	}
+	fmt.Printf("disconnected from device: %s", a.ConnectedDevice.Properties.Name)
 	return nil
 }
