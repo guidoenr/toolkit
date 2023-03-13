@@ -1,15 +1,17 @@
 package main
 
+import "fmt"
+
 func main() {
 	var tooth Autooth
 	err := tooth.initialize()
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
-	err = tooth.ConnectToDevice("T2")
+	err = tooth.ConnectToDevice("a")
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
 }
