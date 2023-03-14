@@ -9,10 +9,15 @@ func main() {
 		panic(err)
 	}
 
-	err = tooth.ConnectToDevice("T2")
+	// ADDRESS :
+	err = tooth.ConnectToDevice("JBL-guido-c5")
 	if err != nil {
-		fmt.Println()
+		fmt.Println(err)
 	}
 
+	fmt.Printf("name: %s", tooth.ConnectedDevice.Properties.Name)
+
+	/*	tooth.Ping()
+	 */
 	/*err = tooth.Disconnect()*/
 }
