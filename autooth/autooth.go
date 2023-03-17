@@ -18,7 +18,7 @@ type Autooth struct {
 // initialize the autooth client
 func (a *Autooth) initialize() error {
 	// get the default adapter
-	defaultAdapter, err := api.GetAdapter("00:1A:7D:DA:71:15")
+	defaultAdapter, err := api.GetDefaultAdapter()
 	if err != nil {
 		msg := fmt.Sprintf("getting adapter: %v", err)
 		return errors.New(msg)
