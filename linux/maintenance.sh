@@ -1,51 +1,48 @@
-#!bin/bash
+#!/bin/bash
 
-echo "LINUX SPEED-UP by @guidoenr"
+echo "Starting.."
 
-cyan='\033[0;31m'
-clear='\033[0m'
-check='\xE2\x9C\x94'
+# Create a temporary file for storing command output
+tmpfile=$(mktemp)
 
-printStarting(){
-    printf "[task]- $1 "
+# Define a function to check command exit status and display error message if necessary
+check_status() {
+  if [ $1 -ne 0 ]; then
+    echo "Error: $2 failed. See $tmpfile for details."
+    exit 1
+  fi
 }
 
-printFinished(){
-    printf "${cyan}${check}${clear} \n"
-}
+# Clear cache
+sudo apt clean > $tmpfile 2>&1
+check_status $? "apt clean"
 
-# clean apt
-printStarting "apt-get clean"
-sudo apt-get clean -y > /dev/null
-printFinished 
+# Remove old kernels
+sudo apt autoremove --purge > $tmpfile 2>&1
+check_status $? "apt autoremove"
 
-# auto clean packages
-printStarting "apt-get autoclean"
-sudo apt-get autoclean -y > /dev/null
-printFinished 
+# Remove unneeded packages
+sudo apt-get autoremove > $tmpfile 2>&1
+check_status $? "apt-get autoremove"
 
-# auto remove packages
-printStarting "apt-get autoremove"
-sudo apt-get autoremove -y > /dev/null
-printFinished 
+# Remove unnecessary files from home directory
+rm -rf ~/Pictures/Screenshots/* ~/.local/share/Trash/* > $tmpfile 2>&1
+check_status $? "rm"
 
-# clean logs in 30 days
-printStarting "cleaning journal logs"
-sudo journalctl --vacuum-time=30d --quiet
-printFinished 
+# Update system
+sudo apt update && sudo apt upgrade -y > $tmpfile 2>&1
+check_status $? "apt update/upgrade"
 
-# clean thumbnail cache
-printStarting "cleaning thumbnail cache"
-rm -rf ~/.cache/thumbnails/* > /dev/null
-printFinished 
+# Clean up system logs
+sudo journalctl --vacuum-size=1G > $tmpfile 2>&1
+check_status $? "journalctl"
 
-# remove screenshots
-printStarting "removing screenshots in ~/Pictures/Screenshots"
-rm -rf ~/Pictures/Screenshots/*
-printFinished 
+# Remove cache thumbnails
+rm -rf ~/.cache/thumbnails/* > $tmpfile 2>&1
+check_status $? "rm"
 
-printf "All tasks finished \n"
+# Clean up temporary file
+rm $tmpfile
 
-exit
-
-
+# Display completion message
+echo "Optimization completed successfully!"
