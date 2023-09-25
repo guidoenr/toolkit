@@ -14,15 +14,15 @@ check_status() {
 }
 
 # Clear cache
-sudo apt clean > $tmpfile 2>&1
+sudo apt clean -y > $tmpfile 2>&1
 check_status $? "apt clean"
 
 # Remove old kernels
-sudo apt autoremove --purge > $tmpfile 2>&1
+sudo apt autoremove --purge -y > $tmpfile 2>&1
 check_status $? "apt autoremove"
 
 # Remove unneeded packages
-sudo apt-get autoremove > $tmpfile 2>&1
+sudo apt-get autoremove -y > $tmpfile 2>&1
 check_status $? "apt-get autoremove"
 
 # Remove unnecessary files from home directory
