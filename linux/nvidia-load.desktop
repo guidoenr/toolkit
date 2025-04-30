@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/guido/toolkit/linux/load-nvidia-settings.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Load NVIDIA Settings
