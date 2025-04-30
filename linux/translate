@@ -1,0 +1,22 @@
+#!/bin/bash
+
+MODEL="mistral"
+
+if [ -z "$1" ]; then
+    read -p "input: " INPUT
+else
+    INPUT="$*"
+fi
+
+PROMPT="ayudame por favor \"$INPUT\""
+
+# call to the ollama server api to generate
+curl -s http://localhost:11434/api/generate \
+  -d '{
+    "model": "'"$MODEL"'",
+    "prompt": "'"$PROMPT"'",
+    "stream": false
+  }' | jq -r .response
+
+
+
